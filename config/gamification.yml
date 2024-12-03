@@ -154,14 +154,15 @@ events:
                   amount: 2
 
 achievements:
-    achievements:
-        DailySignIn:
-            requirements:
-                - event:
-                      name: Cocreator_SignIn
-                - xp:
-                      name: XP
-                      amount: 2
+    DailySignIn:
+        requirements:
+            - event:
+                  name: Cocreator_SignIn
+                  amount: 1
+        actions:
+            - xp:
+                  name: XP
+                  amount: 2
 
     FullExplorer:
         requirements:
