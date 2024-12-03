@@ -1,141 +1,186 @@
 # define context fields?
 
 levels:
-    type: manual
-    steps: [100,250,400,750,1100]
+    type: linear
+    interval: 100
 
 XPs:
-    # XP is predefined
-    - postXP
+    # XP pool is predefined
+    - Credits
+    - SignInsToday
 
 events:
-    ForumPost:
+    Cocreator_SignIn: ~
+    Cocreator_GiveFeedback:
         actions:
             - xp:
-                name: postXP
-                amount: 1
-            - xp:
-                name: XP
-                amount: 10
-    QuestionAsked:
+                  name: XP
+                  amount: 10
+    Cocreator_Reflect:
         actions:
             - xp:
-                name: XP
-                amount: 2
-    VoluntarySelfTestTaken: ~
-    CourseCompleted:
+                  name: XP
+                  amount: 10
+    Cocreator_BlockCreativityDaily:
         actions:
             - xp:
-                name: XP
-                amount: 20
-    VideoClicked: ~
-    SelfAssigmentStarted: ~
-    SelfTestStarted: ~
-    X: ~
-
+                  name: XP
+                  amount: -5
+    Cocreator_AbuseActionDaily:
+        actions:
+            - xp:
+                  name: XP
+                  amount: -5
+    Cocreator_TryAllFeatures:
+        actions:
+            - xp:
+                  name: XP
+                  amount: 10
+    Cocreator_Stay3Months:
+        actions:
+            - xp:
+                  name: XP
+                  amount: 30
+    Chat_SendMessage:
+        actions:
+            - xp:
+                  name: XP
+                  amount: 1
+    Chat_Send100Characters:
+        actions:
+            - xp:
+                  name: XP
+                  amount: 1
+    Chat_SignInDaily:
+        actions:
+            - xp:
+                  name: XP
+                  amount: 2
+    Chat_Stay5MinActive:
+        actions:
+            - xp:
+                  name: XP
+                  amount: 1
+    Chat_ClickLink:
+        actions:
+            - xp:
+                  name: XP
+                  amount: 1
+    Chat_CopyMessage:
+        actions:
+            - xp:
+                  name: XP
+                  amount: 1
+    Chat_DigDeeper:
+        actions:
+            - xp:
+                  name: XP
+                  amount: 1
+    Chat_AskForRecall:
+        actions:
+            - xp:
+                  name: XP
+                  amount: 1
+    Chat_StayOnTopic:
+        actions:
+            - xp:
+                  name: XP
+                  amount: 1
+    PersonalityTest_CompleteTest: ~
+    FinancialAnalysis_UploadValidDocs:
+        actions:
+            - xp:
+                  name: XP
+                  amount: 2
+    FinancialAnalysis_RecurrentUpload:
+        actions:
+            - xp:
+                  name: XP
+                  amount: 1
+    FinancialAnalysis_CopyContent:
+        actions:
+            - xp:
+                  name: XP
+                  amount: 1
+    FinancialAnalysis_ImproveMetric:
+        actions:
+            - xp:
+                  name: XP
+                  amount: 20
+    PlanOfAction_CreatePlanOfAction:
+        actions:
+            - xp:
+                  name: XP
+                  amount: 2
+    PlanOfAction_RememberDream:
+        actions:
+            - xp:
+                  name: XP
+                  amount: 3
+    PlanOfAction_DailyRemembrance:
+        actions:
+            - xp:
+                  name: XP
+                  amount: 1
+    PlanOfAction_CheckOffTask:
+        actions:
+            - xp:
+                  name: XP
+                  amount: 1
+    PlanOfAction_PerformTaskOnTime:
+        actions:
+            - xp:
+                  name: XP
+                  amount: 2
+    PlanOfAction_StartOnTimeOrEarlier:
+        actions:
+            - xp:
+                  name: XP
+                  amount: 3
+    PlanOfAction_FinishEarly:
+        actions:
+            - xp:
+                  name: XP
+                  amount: 1
+    PlanOfAction_Enjoy:
+        actions:
+            - xp:
+                  name: XP
+                  amount: 5
+    PlanOfAction_ChangeGoalAfterReflection:
+        actions:
+            - xp:
+                  name: XP
+                  amount: 2
 
 achievements:
-    AnyOfEventAchievement:
-        requirements:
-            - event:
-                name: X
-                conditions:
-                  - AnyOf:
-                      - parameter: Kim
-                        value: gross
-                      - AnyOf:
-                          - parameter: Frede
-                            value: schoen
-                          - parameter: Kim
-                            value: hobbit
-
-    CommunicatorBronze:
-        requirements:
-            - xp:
-                name: postXP
-                amount: 2
-        actions:
-            - xp:
-                name: XP
-                amount: 23
-        hidden: true
-
-    CommunicatorSilver:
-        requirements:
-            - achievement:
-                name: CommunicatorBronze
-            - xp:
-                name: postXP
-                amount: ">= 5"
-        replaces: [CommunicatorBronze]
-
-    ComCom:
-        requirements:
-            - event:
-                name: ForumPost
-                amount: ">= 10"
-
-    VoluntarySelfTestTakenAward:
-        requirements:
-            - event:
-                name: VoluntarySelfTestTaken
-                conditions:
-                    - parameter: completion_percentage
-                      value: 100
-        # maxAwarded and maxAwardedTotal are implicitly 1
-        # maxAwarded: 1
-        # maxAwardedTotal: 1
-
-        # could be e.g. per user and course, could be renamed to "per"
-        scope: [user]
-        actions:
-            - xp:
-                name: XP
-                amount: 2
-
-    JavaPro:
-        requirements:
-            - event:
-                name: CourseCompleted
-                amount: 5
-                conditions:
-                    - parameter: tags
-                      value: java
-        scope: [user]
-
-    # achievement per completed course
-    CourseCompletedAward:
-        requirements:
-            - event:
-                name: CourseCompleted
-        scope: [user, context.course_id]
-
-    ContinousAttendance:
-        requirements:
-        # VideoClicked AND (SelfTestStarted OR SelfAssigmentStarted)
-            - event:
-                name: VideoClicked
-                conditions:
-                    - parameter: watched_videos_of_week_percentage
-                      value: ">= 70"
-            - AnyOf:
+    achievements:
+        DailySignIn:
+            requirements:
                 - event:
-                    name: SelfTestStarted
-                - event:
-                    name: SelfAssigmentStarted
-        hidden: true
-        scope: [user, context.course_id, context.course_week]
+                      name: Cocreator_SignIn
+                - xp:
+                      name: XP
+                      amount: 2
+
+    FullExplorer:
+        requirements:
+            - event:
+                  name: PersonalityTest_CompleteTest
+                  amount: 1
+            - event:
+                  name: Chat_SendMessage
+                  amount: 3
+            - event:
+                  name: FinancialAnalysis_UploadValidDocs
+                  amount: 1
+            - event:
+                  name: PlanOfAction_CreatePlanOfAction
+                  amount: 1
         actions:
             - xp:
-                name: XP
-                amount: 10
-                requirements:
-                  - achievement:
-                      name: ContinousAttendance
-                      conditions:
-                          - parameter: context.user_id
-                            value: user_id
-                          - parameter: context.course_week
-                            value: course_week -1
-                          - parameter: context.course_id
-                            value: course_id
+                  name: XP
+                  amount: 50
+        maxAwarded: 1
+        maxAwardedTotal: 1
+        hidden: false
