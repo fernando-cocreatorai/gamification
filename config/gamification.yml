@@ -163,6 +163,8 @@ achievements:
             - xp:
                   name: XP
                   amount: 2
+        maxAwarded: 1
+        resetPeriod: daily
 
     FullExplorer:
         requirements:
@@ -181,7 +183,7 @@ achievements:
         actions:
             - xp:
                   name: XP
-                  amount: 50
+                  amount: 5
         maxAwarded: 1
         maxAwardedTotal: 1
         hidden: false

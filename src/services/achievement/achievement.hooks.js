@@ -1,4 +1,4 @@
-
+const { disallow } = require('feathers-hooks-common');
 
 const achievementActions = require('../../hooks/achievement-actions');
 
@@ -8,9 +8,9 @@ module.exports = {
     find: [],
     get: [],
     create: [],
-    update: [],
-    patch: [],
-    remove: []
+    update: [disallow('external'), updateTimestamp()],
+    patch: [disallow('external'), updateTimestamp()],
+    remove: [disallow('external')]
   },
 
   after: {
@@ -19,7 +19,7 @@ module.exports = {
     get: [],
     create: [achievementActions()],
     update: [],
-    patch: [],
+    patch: [achievementActions()],
     remove: []
   },
 
@@ -33,3 +33,10 @@ module.exports = {
     remove: []
   }
 };
+
+function updateTimestamp() {
+  return async context => {
+    context.data.updatedAt = new Date();
+    return context;
+  };
+}

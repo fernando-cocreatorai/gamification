@@ -11,11 +11,13 @@ module.exports = function (app) {
   const mongooseClient = app.get('mongooseClient');
   const { Schema } = mongooseClient;
   const achievement = new Schema({
-    user_id: {type: String, required: true},
-    name: {type: String, required: true},
-    current_amount: {type: Number, required: true},
-    total_amount: {type: Number, required: true},
-    scope: {type: Map, required: false, default: null}
+    user_id: { type: String, required: true },
+    name: { type: String, required: true },
+    current_amount: { type: Number, required: true },
+    total_amount: { type: Number, required: true },
+    resetPeriod: { type: String, enum: ['daily', 'weekly', 'monthly'] }
+  }, {
+    timestamps: true  // This will add createdAt and updatedAt fields
   });
   achievement.index({ user_id: 1, name: 1 }, {unique: true});
 

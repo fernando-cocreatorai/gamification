@@ -10,5 +10,8 @@
   "rabbitmq": "localhost:5672",
   "rabbitQueue": "my-queue",
   "rabbitExchange": "my-exchange",
+  "logger": {
+    "level": "debug"
+  },
   "rabbitRoutingKey": "my-key"
 }

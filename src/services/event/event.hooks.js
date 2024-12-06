@@ -1,12 +1,13 @@
 const ruleChecker = require('../../hooks/event-actions');
 const achievementRuleChecker = require('../../hooks/achievement-rule-checker');
+const periodicReset = require('../../hooks/periodic-reset');
 
 module.exports = {
   before: {
     all: [],
     find: [],
     get: [],
-    create: [],
+    create: [periodicReset()],
     update: [],
     patch: [],
     remove: []

@@ -1,3 +1,4 @@
+const moment = require('moment');
 const yaml = require('js-yaml');
 const fs   = require('fs');
 
@@ -30,6 +31,7 @@ class AchievementRule {
     this.scope = rule['scope'] === undefined ? ['user_id'] : rule['scope'];
     this.actions = rule['actions'] === undefined ? [] : rule['actions'];
     this.hidden = rule['hidden'] === undefined ? false : rule['hidden'];
+    this.resetPeriod = rule.resetPeriod;
   }
 
   async isFulfilled(context, isFirstCycle) {
@@ -43,17 +45,47 @@ class AchievementRule {
 
   async canBeAwarded(context) {
     const achievementService = context.app.service('achievements');
-    const awardedSoFar = await achievementService.find({
+    const [existingAchievement] = await achievementService.find({
       query: {
         user_id: context.data.user_id,
         name: this.name
       }
     });
-    const currentAmount = awardedSoFar.length === 0 ? 0 : awardedSoFar[0].current_amount;
-    const totalAmount = awardedSoFar.length === 0 ? 0 : awardedSoFar[0].total_amount;
 
+    if (!existingAchievement) {
+      return true;
+    }
+
+    if (this.resetPeriod) {
+      const lastAwardedDate = moment(existingAchievement.updatedAt);
+      const now = moment();
+      let shouldReset = false;
+
+      switch (this.resetPeriod) {
+        case 'daily':
+          shouldReset = lastAwardedDate.isBefore(now, 'day');
+          break;
+        case 'weekly':
+          shouldReset = lastAwardedDate.isBefore(now.startOf('isoWeek'));
+          break;
+        case 'monthly':
+          shouldReset = lastAwardedDate.isBefore(now.startOf('month'));
+          break;
+      }
+
+      if (shouldReset) {
+        await achievementService.patch(existingAchievement._id, {
+          current_amount: 0
+        });
+        return true;
+      }
+    }
+
+    const currentAmount = existingAchievement.current_amount;
+    const totalAmount = existingAchievement.total_amount;
     return currentAmount < this.maxAwarded && totalAmount < this.maxAwardedTotal;
   }
+
 }
 
 class Requirement {
