@@ -1,157 +1,42 @@
-# define context fields?
-
 levels:
     type: linear
     interval: 100
 
 XPs:
-    # XP pool is predefined
     - Credits
     - SignInsToday
 
 events:
     Cocreator_SignIn: ~
-    Cocreator_GiveFeedback:
-        actions:
-            - xp:
-                  name: XP
-                  amount: 10
-    Cocreator_Reflect:
-        actions:
-            - xp:
-                  name: XP
-                  amount: 10
-    Cocreator_BlockCreativityDaily:
-        actions:
-            - xp:
-                  name: XP
-                  amount: -5
-    Cocreator_AbuseActionDaily:
-        actions:
-            - xp:
-                  name: XP
-                  amount: -5
-    Cocreator_TryAllFeatures:
-        actions:
-            - xp:
-                  name: XP
-                  amount: 10
-    Cocreator_Stay3Months:
-        actions:
-            - xp:
-                  name: XP
-                  amount: 30
-    Chat_SendMessage:
-        actions:
-            - xp:
-                  name: XP
-                  amount: 1
-    Chat_Send100Characters:
-        actions:
-            - xp:
-                  name: XP
-                  amount: 1
-    Chat_SignInDaily:
-        actions:
-            - xp:
-                  name: XP
-                  amount: 2
-    Chat_Stay5MinActive:
-        actions:
-            - xp:
-                  name: XP
-                  amount: 1
-    Chat_ClickLink:
-        actions:
-            - xp:
-                  name: XP
-                  amount: 1
-    Chat_CopyMessage:
-        actions:
-            - xp:
-                  name: XP
-                  amount: 1
-    Chat_DigDeeper:
-        actions:
-            - xp:
-                  name: XP
-                  amount: 1
-    Chat_AskForRecall:
-        actions:
-            - xp:
-                  name: XP
-                  amount: 1
-    Chat_StayOnTopic:
-        actions:
-            - xp:
-                  name: XP
-                  amount: 1
+    Cocreator_GiveFeedback: ~
+    Cocreator_Reflect: ~
+    Cocreator_BlockCreativityDaily: ~
+    Cocreator_AbuseActionDaily: ~
+    Cocreator_TryAllFeatures: ~
+    Cocreator_Stay3Months: ~
+    Chat_SendMessage: ~
+    Chat_Send100Characters: ~
+    Chat_SignInDaily: ~
+    Chat_Stay5MinActive: ~
+    Chat_ClickLink: ~
+    Chat_CopyMessage: ~
+    Chat_DigDeeper: ~
+    Chat_AskForRecall: ~
+    Chat_StayOnTopic: ~
     PersonalityTest_CompleteTest: ~
-    FinancialAnalysis_UploadValidDocs:
-        actions:
-            - xp:
-                  name: XP
-                  amount: 2
-    FinancialAnalysis_RecurrentUpload:
-        actions:
-            - xp:
-                  name: XP
-                  amount: 1
-    FinancialAnalysis_CopyContent:
-        actions:
-            - xp:
-                  name: XP
-                  amount: 1
-    FinancialAnalysis_ImproveMetric:
-        actions:
-            - xp:
-                  name: XP
-                  amount: 20
-    PlanOfAction_CreatePlanOfAction:
-        actions:
-            - xp:
-                  name: XP
-                  amount: 2
-    PlanOfAction_RememberDream:
-        actions:
-            - xp:
-                  name: XP
-                  amount: 3
-    PlanOfAction_DailyRemembrance:
-        actions:
-            - xp:
-                  name: XP
-                  amount: 1
-    PlanOfAction_CheckOffTask:
-        actions:
-            - xp:
-                  name: XP
-                  amount: 1
-    PlanOfAction_PerformTaskOnTime:
-        actions:
-            - xp:
-                  name: XP
-                  amount: 2
-    PlanOfAction_StartOnTimeOrEarlier:
-        actions:
-            - xp:
-                  name: XP
-                  amount: 3
-    PlanOfAction_FinishEarly:
-        actions:
-            - xp:
-                  name: XP
-                  amount: 1
-    PlanOfAction_Enjoy:
-        actions:
-            - xp:
-                  name: XP
-                  amount: 5
-    PlanOfAction_ChangeGoalAfterReflection:
-        actions:
-            - xp:
-                  name: XP
-                  amount: 2
+    FinancialAnalysis_UploadValidDocs: ~
+    FinancialAnalysis_RecurrentUpload: ~
+    FinancialAnalysis_CopyContent: ~
+    FinancialAnalysis_ImproveMetric: ~
+    PlanOfAction_CreatePlanOfAction: ~
+    PlanOfAction_RememberDream: ~
+    PlanOfAction_DailyRemembrance: ~
+    PlanOfAction_CheckOffTask: ~
+    PlanOfAction_PerformTaskOnTime: ~
+    PlanOfAction_StartOnTimeOrEarlier: ~
+    PlanOfAction_FinishEarly: ~
+    PlanOfAction_Enjoy: ~
+    PlanOfAction_ChangeGoalAfterReflection: ~
 
 achievements:
     DailySignIn:
@@ -187,3 +72,316 @@ achievements:
         maxAwarded: 1
         maxAwardedTotal: 1
         hidden: false
+
+    FeedbackProvider:
+        requirements:
+            - event:
+                  name: Cocreator_GiveFeedback
+                  amount: 1
+        actions:
+            - xp:
+                  name: XP
+                  amount: 10
+        maxAwarded: 1
+
+    SelfReflector:
+        requirements:
+            - event:
+                  name: Cocreator_Reflect
+                  amount: 1
+        actions:
+            - xp:
+                  name: XP
+                  amount: 10
+        maxAwarded: 1
+        resetPeriod: weekly
+
+    CreativityBlocker:
+        requirements:
+            - event:
+                  name: Cocreator_BlockCreativityDaily
+                  amount: 1
+        actions:
+            - xp:
+                  name: XP
+                  amount: -5
+        maxAwarded: 1
+        resetPeriod: daily
+
+    DailyAbuser:
+        requirements:
+            - event:
+                  name: Cocreator_AbuseActionDaily
+                  amount: 1
+        actions:
+            - xp:
+                  name: XP
+                  amount: -5
+        maxAwarded: 1
+        resetPeriod: daily
+
+    FeatureExplorer:
+        requirements:
+            - event:
+                  name: Cocreator_TryAllFeatures
+                  amount: 1
+        actions:
+            - xp:
+                  name: XP
+                  amount: 10
+        maxAwarded: 1
+
+    LoyalUser:
+        requirements:
+            - event:
+                  name: Cocreator_Stay3Months
+                  amount: 1
+        actions:
+            - xp:
+                  name: XP
+                  amount: 30
+        maxAwarded: 1
+
+    ChatParticipant:
+        requirements:
+            - event:
+                  name: Chat_SendMessage
+                  amount: 1
+        actions:
+            - xp:
+                  name: XP
+                  amount: 1
+        maxAwarded: -1
+
+    DetailedCommunicator:
+        requirements:
+            - event:
+                  name: Chat_Send100Characters
+                  amount: 1
+        actions:
+            - xp:
+                  name: XP
+                  amount: 1
+        maxAwarded: -1
+
+    DailyChatUser:
+        requirements:
+            - event:
+                  name: Chat_SignInDaily
+                  amount: 1
+        actions:
+            - xp:
+                  name: XP
+                  amount: 2
+        maxAwarded: 1
+        resetPeriod: daily
+
+    ActiveChatter:
+        requirements:
+            - event:
+                  name: Chat_Stay5MinActive
+                  amount: 1
+        actions:
+            - xp:
+                  name: XP
+                  amount: 1
+        maxAwarded: -1
+
+    LinkExplorer:
+        requirements:
+            - event:
+                  name: Chat_ClickLink
+                  amount: 1
+        actions:
+            - xp:
+                  name: XP
+                  amount: 1
+        maxAwarded: -1
+
+    MessageCopier:
+        requirements:
+            - event:
+                  name: Chat_CopyMessage
+                  amount: 1
+        actions:
+            - xp:
+                  name: XP
+                  amount: 1
+        maxAwarded: -1
+
+    DeepDiver:
+        requirements:
+            - event:
+                  name: Chat_DigDeeper
+                  amount: 1
+        actions:
+            - xp:
+                  name: XP
+                  amount: 1
+        maxAwarded: -1
+
+    MemorySeeker:
+        requirements:
+            - event:
+                  name: Chat_AskForRecall
+                  amount: 1
+        actions:
+            - xp:
+                  name: XP
+                  amount: 1
+        maxAwarded: -1
+
+    FocusedChatter:
+        requirements:
+            - event:
+                  name: Chat_StayOnTopic
+                  amount: 1
+        actions:
+            - xp:
+                  name: XP
+                  amount: 1
+        maxAwarded: -1
+
+    FinancialUploader:
+        requirements:
+            - event:
+                  name: FinancialAnalysis_UploadValidDocs
+                  amount: 1
+        actions:
+            - xp:
+                  name: XP
+                  amount: 2
+        maxAwarded: -1
+
+    RegularUploader:
+        requirements:
+            - event:
+                  name: FinancialAnalysis_RecurrentUpload
+                  amount: 1
+        actions:
+            - xp:
+                  name: XP
+                  amount: 1
+        maxAwarded: -1
+
+    FinancialContentCopier:
+        requirements:
+            - event:
+                  name: FinancialAnalysis_CopyContent
+                  amount: 1
+        actions:
+            - xp:
+                  name: XP
+                  amount: 1
+        maxAwarded: -1
+
+    FinancialImprover:
+        requirements:
+            - event:
+                  name: FinancialAnalysis_ImproveMetric
+                  amount: 1
+        actions:
+            - xp:
+                  name: XP
+                  amount: 20
+        maxAwarded: -1
+
+    ActionPlanner:
+        requirements:
+            - event:
+                  name: PlanOfAction_CreatePlanOfAction
+                  amount: 1
+        actions:
+            - xp:
+                  name: XP
+                  amount: 2
+        maxAwarded: -1
+
+    DreamRecaller:
+        requirements:
+            - event:
+                  name: PlanOfAction_RememberDream
+                  amount: 1
+        actions:
+            - xp:
+                  name: XP
+                  amount: 3
+        maxAwarded: -1
+
+    DailyDreamer:
+        requirements:
+            - event:
+                  name: PlanOfAction_DailyRemembrance
+                  amount: 1
+        actions:
+            - xp:
+                  name: XP
+                  amount: 1
+        maxAwarded: 1
+        resetPeriod: daily
+
+    TaskCompleter:
+        requirements:
+            - event:
+                  name: PlanOfAction_CheckOffTask
+                  amount: 1
+        actions:
+            - xp:
+                  name: XP
+                  amount: 1
+        maxAwarded: -1
+
+    PunctualPerformer:
+        requirements:
+            - event:
+                  name: PlanOfAction_PerformTaskOnTime
+                  amount: 1
+        actions:
+            - xp:
+                  name: XP
+                  amount: 2
+        maxAwarded: -1
+
+    EarlyStarter:
+        requirements:
+            - event:
+                  name: PlanOfAction_StartOnTimeOrEarlier
+                  amount: 1
+        actions:
+            - xp:
+                  name: XP
+                  amount: 3
+        maxAwarded: -1
+
+    EarlyFinisher:
+        requirements:
+            - event:
+                  name: PlanOfAction_FinishEarly
+                  amount: 1
+        actions:
+            - xp:
+                  name: XP
+                  amount: 1
+        maxAwarded: -1
+
+    TaskEnjoyer:
+        requirements:
+            - event:
+                  name: PlanOfAction_Enjoy
+                  amount: 1
+        actions:
+            - xp:
+                  name: XP
+                  amount: 5
+        maxAwarded: -1
+
+    GoalReflector:
+        requirements:
+            - event:
+                  name: PlanOfAction_ChangeGoalAfterReflection
+                  amount: 1
+        actions:
+            - xp:
+                  name: XP
+                  amount: 2
+        maxAwarded: -1
