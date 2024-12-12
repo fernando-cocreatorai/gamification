@@ -1,4 +1,33 @@
-Payload format
+# Gamification 
+
+# Notes for CocreatorAI
+
+## Quick start
+
+1. 
+```
+npm install
+```
+
+2. 
+```
+docker-compose -f docker-compose.dev.yml up
+```
+
+3. The project contains 3 containers. Usually the app container takes the longest. Wait until it loads by checking http://localhost:3030/ until you see a Feathers page
+
+4. You can download MongoDB Compass to view the contents of the mongodb in Docker
+https://www.mongodb.com/try/download/compass. Connect to the deafult port number and open the "gamification" db
+
+5. Send valid requests, e.g.
+```
+curl -X POST http://localhost:3030/events -H "Content-Type: application/json" -d "{""user_id"": ""123"", ""name"": ""Cocreator_GiveFeedback"", ""payload"": {}}"
+```
+
+6. See the logged documents in the corresponding collections
+
+## Payload format
+
 {
     "user_id": "123",
     "name": "Chat_SendMessage",
@@ -7,11 +36,35 @@ Payload format
         }
 }
 
+### Fields
+
+- user_id: a uniquely identifying string for each user
+- name: the event name as defined in config\gamification.yml
+- payload: may be used later. We'll send the payload field and keep it empty even if it's not used, to make the project more maintainable
+
+## Strategy
+
+- Events will not reward in any way, they will only record information
+- All logic will be executed in achievements
+- No punishing events will be used
+- In the achievements collection in the db, the "current_amount" field indicates how many of those achievements are currently held. The "total_amount" indicates how many have ever been awarded
+
+## Files modified for CocreatorAI
+
+- config\gamification.yml
+- src\hooks\achievement-actions.js
+- src\hooks\achievement-rule-checker.js
+- src\hooks\logger.js
+- src\hooks\periodic-reset.js
+- src\models\achievement.model.js
+- src\services\achievement\achievement.hooks.js
+- src\services\event\event.hooks.js
+
+# Notes from the original package
+
 [![Build Status](https://travis-ci.com/schul-cloud/gamification.svg?branch=master)](https://travis-ci.com/schul-cloud/gamification)
 [![Coverage Status](https://coveralls.io/repos/github/schul-cloud/gamification/badge.svg?branch=master)](https://coveralls.io/github/schul-cloud/gamification?branch=master)
 [![GitHub license](https://img.shields.io/github/license/schul-cloud/gamification.svg)](https://github.com/schul-cloud/gamification/blob/master/LICENSE) [![Greenkeeper badge](https://badges.greenkeeper.io/schul-cloud/gamification.svg)](https://greenkeeper.io/)
-
-# Gamification
 
 > A reusable microservice for gamification.
 

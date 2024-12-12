@@ -10,12 +10,10 @@ events:
     Cocreator_SignIn: ~
     Cocreator_GiveFeedback: ~
     Cocreator_Reflect: ~
-    Cocreator_BlockCreativityDaily: ~
-    Cocreator_AbuseActionDaily: ~
     Cocreator_TryAllFeatures: ~
     Cocreator_Stay3Months: ~
     Chat_SendMessage: ~
-    Chat_Send100Characters: ~
+    Chat_SendOver100Characters: ~
     Chat_SignInDaily: ~
     Chat_Stay5MinActive: ~
     Chat_ClickLink: ~
@@ -39,7 +37,7 @@ events:
     PlanOfAction_ChangeGoalAfterReflection: ~
 
 achievements:
-    DailySignIn:
+    SignedInToday:
         requirements:
             - event:
                   name: Cocreator_SignIn
@@ -50,6 +48,12 @@ achievements:
                   amount: 2
         maxAwarded: 1
         resetPeriod: daily
+
+    DailySignIn:
+        requirements:
+            - achievement:
+                  name: SignedInToday
+                  amount: 1
 
     FullExplorer:
         requirements:
@@ -83,6 +87,7 @@ achievements:
                   name: XP
                   amount: 10
         maxAwarded: 1
+        resetPeriod: daily
 
     SelfReflector:
         requirements:
@@ -96,46 +101,11 @@ achievements:
         maxAwarded: 1
         resetPeriod: weekly
 
-    CreativityBlocker:
+    DailySignIn100Times:
         requirements:
-            - event:
-                  name: Cocreator_BlockCreativityDaily
-                  amount: 1
-        actions:
-            - xp:
-                  name: XP
-                  amount: -5
-        maxAwarded: 1
-        resetPeriod: daily
-
-    DailyAbuser:
-        requirements:
-            - event:
-                  name: Cocreator_AbuseActionDaily
-                  amount: 1
-        actions:
-            - xp:
-                  name: XP
-                  amount: -5
-        maxAwarded: 1
-        resetPeriod: daily
-
-    FeatureExplorer:
-        requirements:
-            - event:
-                  name: Cocreator_TryAllFeatures
-                  amount: 1
-        actions:
-            - xp:
-                  name: XP
-                  amount: 10
-        maxAwarded: 1
-
-    LoyalUser:
-        requirements:
-            - event:
-                  name: Cocreator_Stay3Months
-                  amount: 1
+            - achievement:
+                  name: DailySignIn
+                  amount: 100
         actions:
             - xp:
                   name: XP
@@ -151,18 +121,20 @@ achievements:
             - xp:
                   name: XP
                   amount: 1
-        maxAwarded: -1
+        maxAwarded: 4
+        resetPeriod: daily
 
     DetailedCommunicator:
         requirements:
             - event:
-                  name: Chat_Send100Characters
+                  name: Chat_SendOver100Characters
                   amount: 1
         actions:
             - xp:
                   name: XP
                   amount: 1
-        maxAwarded: -1
+        maxAwarded: 4
+        resetPeriod: daily
 
     DailyChatUser:
         requirements:
