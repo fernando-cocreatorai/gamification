@@ -15,10 +15,11 @@ module.exports = function (app) {
     name: { type: String, required: true },
     current_amount: { type: Number, required: true },
     total_amount: { type: Number, required: true },
-    resetPeriod: { type: String, enum: ['daily', 'weekly', 'monthly'] }
+    resetPeriod: {type: String, enum: ['daily', 'weekly', 'monthly', null], default: null}
   }, {
     timestamps: true  // This will add createdAt and updatedAt fields
   });
+
   achievement.index({ user_id: 1, name: 1 }, {unique: true});
 
   return model = mongooseClient.model('achievement', achievement);

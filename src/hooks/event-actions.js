@@ -11,6 +11,7 @@ module.exports = function (options = {}) {
     if (eventRule) {
       const eventActions = eventRule['actions'];
 
+      // perform actions for the event. Only performs xp actions for the event.
       for (const action of eventActions) {
         let user_id;
         if (action['xp']['awardee_id']) {
@@ -29,6 +30,7 @@ module.exports = function (options = {}) {
           }
         });
 
+        // if the combination already exists, increment the amount
         if (uniqueCombination.length > 0) {
           await xpService.patch(uniqueCombination[0]._id, {amount: uniqueCombination[0].amount + action['xp']['amount']});
         } else {

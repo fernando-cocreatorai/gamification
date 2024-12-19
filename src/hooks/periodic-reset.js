@@ -1,5 +1,5 @@
 const moment = require('moment');
-const logger = require('winston');
+const logger = require('../logger');
 
 module.exports = function() {
   return async context => {
@@ -42,9 +42,12 @@ module.exports = function() {
 
       if (shouldReset) {
         logger.debug('Resetting achievement', { achievementId: achievement._id });
-        await achievementService.patch(achievement._id, {
-          current_amount: 0
-        });
+        await achievementService.patch(achievement._id, 
+          { current_amount: 0 }
+        );
+        context.params.isPeriodicReset = true;
+        logger.debug('Context after setting isPeriodicReset:', JSON.stringify(context.params, null, 2));
+
       } else {
         logger.debug('Achievement does not need reset', { achievementId: achievement._id });
       }

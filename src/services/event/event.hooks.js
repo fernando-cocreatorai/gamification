@@ -1,16 +1,17 @@
 const ruleChecker = require('../../hooks/event-actions');
 const achievementRuleChecker = require('../../hooks/achievement-rule-checker');
 const periodicReset = require('../../hooks/periodic-reset');
+const { disallow } = require('feathers-hooks-common');
 
 module.exports = {
   before: {
     all: [],
-    find: [],
-    get: [],
-    create: [periodicReset()],
-    update: [],
-    patch: [],
-    remove: []
+    find: [disallow('external')],
+    get: [disallow('external')],
+    create: [],
+    update: [disallow('external')],
+    patch: [disallow('external')],
+    remove: [disallow('external')]
   },
 
   after: {

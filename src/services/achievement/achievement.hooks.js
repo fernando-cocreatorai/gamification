@@ -1,6 +1,7 @@
 const { disallow } = require('feathers-hooks-common');
 
 const achievementActions = require('../../hooks/achievement-actions');
+const periodicReset = require('../../hooks/periodic-reset');
 
 module.exports = {
   before: {
@@ -8,8 +9,8 @@ module.exports = {
     find: [],
     get: [],
     create: [],
-    update: [disallow('external'), updateTimestamp()],
-    patch: [disallow('external'), updateTimestamp()],
+    update: [disallow('external'), updateTimestamp(), periodicReset()],
+    patch: [disallow('external'), updateTimestamp(), periodicReset()],
     remove: [disallow('external')]
   },
 
@@ -18,7 +19,7 @@ module.exports = {
     find: [],
     get: [],
     create: [achievementActions()],
-    update: [],
+    update: [achievementActions()],
     patch: [achievementActions()],
     remove: []
   },

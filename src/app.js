@@ -4,7 +4,7 @@ const favicon = require('serve-favicon');
 const compress = require('compression');
 const helmet = require('helmet');
 const cors = require('cors');
-const logger = require('winston');
+const logger = require('./logger');
 
 const swaggerUi = require('swagger-ui-express');
 const yaml = require('js-yaml');
